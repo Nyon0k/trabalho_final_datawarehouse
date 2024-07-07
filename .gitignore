@@ -1,0 +1,4 @@
+/.venv
+dados/
+*.db
+*.csv

@@ -1,0 +1,61 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:database.db"
+}
+
+generator db {
+  provider             = "prisma-client-py"
+  interface            = "asyncio"
+  recursive_type_depth = -1
+}
+
+model DTempo {
+  tempo_key    String  @id @default(cuid())
+  ano   Int
+  mes   Int
+  dia   Int
+  hora  Int
+  FQualidadeArs   FQualidadeAr[]  @relation("TempoQualidadeAr")
+}
+
+model DLocalizacao {
+  localizacao_key       String   @id @default(cuid())
+  latitude              Float
+  longitude             Float
+  FQualidadeArs         FQualidadeAr[]  @relation("LocalizacaoQualidadeAr")
+}
+
+model DEstacao {
+  estacao_key     String  @id @default(cuid())
+  station_id      Int
+  station_name    String
+  FQualidadeArs   FQualidadeAr[]  @relation("EstacaoQualidadeAr")
+}
+
+model FQualidadeAr {
+  id                String        @id @default(cuid())
+  DTempo            DTempo        @relation(name: "TempoQualidadeAr", fields: [tempo_key], references: [tempo_key], onDelete: Cascade)
+  DEstacao          DEstacao      @relation(name: "EstacaoQualidadeAr",fields: [estacao_key], references: [estacao_key], onDelete: Cascade)
+  DLocalizacao      DLocalizacao  @relation(name: "LocalizacaoQualidadeAr", fields: [localizacao_key], references: [localizacao_key], onDelete: Cascade)
+  tempo_key         String
+  estacao_key       String
+  localizacao_key   String
+  chuva             Float?
+  pres              Float?
+  rs                Float?
+  temp              Float?
+  ur                Float?
+  dir_vento         Float?
+  vel_vento         Float?
+  so2               Float?
+  no2               Float?
+  hcnm              Float?
+  hct               Float?
+  ch4               Float?
+  co                Float?
+  no                Float?
+  nox               Float?
+  o3                Float?
+  pm10              Float?
+  pm2_5             Float?
+}
