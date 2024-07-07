@@ -102,22 +102,3 @@ Com todas as dependências instaladas e o banco de dados configurado, você est�
 ```bash
 python etl/main.py
 ```
-
-## Estrutura do Projeto
-
-- `etl/etl.py`: Script principal que executa o processo de ETL.
-- `etl/update_bd.py`: Script que popula o banco de dados com dados iniciais.
-- `schema.prisma`: Arquivo de schema do Prisma definindo a estrutura do banco de dados.
-
-## Contribuindo
-
-Para contribuir com o projeto, por favor, leia o arquivo `CONTRIBUTING.md` para mais detalhes sobre como enviar pull requests.
-
-## Licença
-
-Este projeto está licenciado sob a Licença MIT - veja o arquivo `LICENSE` para mais detalhes.
-
-```
-
-Este README agora reflete os objetivos do trabalho, fornece instruções detalhadas para instalação e uso, e inclui a documentação relevante para auxiliar no desenvolvimento e execução do projeto.
-```
