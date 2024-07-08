@@ -3,21 +3,8 @@ import asyncio
 import pandas as pd
 
 from prisma import Prisma
-from sqlalchemy import create_engine
 
 db = Prisma()
-
-engine = create_engine('sqlite:///database.db')
-
-def insert_dataframe(df: pd.DataFrame, table_name: str):
-    """
-    Inserts a pandas DataFrame into a SQL table.
-
-    Args:
-        df (pd.DataFrame): The DataFrame to be inserted.
-        table_name (str): The name of the SQL table.
-    """
-    df.to_sql(table_name, con=engine, if_exists='append', index=False)
 
 async def raw_sql_insert(df: pd.DataFrame, table_name: str):
     """
@@ -60,7 +47,6 @@ async def main():
         records = df.to_dict(orient='records')
 
         print(f'Inserindo {len(records)} registros na tabela {model}')
-        # insert_dataframe(df, model)
         await raw_sql_insert(df, model)
 
     await db.disconnect()

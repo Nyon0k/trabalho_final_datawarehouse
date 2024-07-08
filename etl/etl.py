@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 def create_df_dtempo(df):
     df_dtempo = pd.DataFrame()
@@ -20,7 +21,7 @@ def create_df_dtempo(df):
 
     df_dtempo_export = df_dtempo[['tempo_key', 'ano', 'mes', 'dia', 'hora']]
 
-    df_dtempo_export.to_csv('../dados/df_dtempo.csv', index=False)
+    df_dtempo_export.to_csv(os.path.join(os.getcwd(), 'dados/df_dtempo.csv'), index=False)
 
     return df_dtempo
 
@@ -38,7 +39,7 @@ def create_df_dlocalizacao(df):
 
     df_dlocalizacao = df_dlocalizacao[['localizacao_key', 'latitude', 'longitude']]
 
-    df_dlocalizacao.to_csv('../dados/df_dlocalizacao.csv', index=False)
+    df_dlocalizacao.to_csv(os.path.join(os.getcwd(), 'dados/df_dlocalizacao.csv'), index=False)
 
     return df_dlocalizacao
 
@@ -56,7 +57,7 @@ def create_df_destacao(df):
 
     df_destacao = df_destacao[['estacao_key', 'station_id', 'station_name']]
 
-    df_destacao.to_csv('../dados/df_destacao.csv', index=False)
+    df_destacao.to_csv(os.path.join(os.getcwd(), 'dados/df_destacao.csv'), index=False)
 
     return df_destacao
 
@@ -73,11 +74,11 @@ def create_df_fqualidadear(df, df_dtempo, df_dlocalizacao, df_destacao):
     df_fqualidadear = df_estacao_key[['tempo_key', 'estacao_key', 'localizacao_key', 'chuva', 'pres', 'rs', 'temp',
        'ur', 'dir_vento', 'vel_vento', 'so2', 'no2', 'hcnm', 'hct', 'ch4', 'co', 'no', 'nox', 'o3', 'pm10', 'pm2_5']]
     
-    df_fqualidadear.to_csv('../dados/df_fqualidadear.csv', index=True, index_label='id')
+    df_fqualidadear.to_csv(os.path.join(os.getcwd(), 'dados/df_fqualidadear.csv'), index=True, index_label='id')
 
     return df_fqualidadear
 
-df = pd.read_csv('../dados/dados_iqarj.csv')
+df = pd.read_csv(os.path.join(os.getcwd(), 'dados/dados_iqarj.csv'))
 
 # Removendo colunas Sirgas
 df = df.drop(columns=['x_utm_sirgas2000', 'y_utm_sirgas2000'])
