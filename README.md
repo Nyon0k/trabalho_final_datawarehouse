@@ -78,10 +78,10 @@ Para executar o tratamento de dados, siga as seguintes etapas:
 2. Certifique-se de ter o arquvio correto de dados na pasta `dados`. Faça o download do .csv e salve no caminho `dados/dados_iqarj.csv`
    [https://datariov2-pcrj.hub.arcgis.com/datasets/PCRJ::qualidade-do-ar-dados-hor%C3%A1rios/about?layer=2](https://datariov2-pcrj.hub.arcgis.com/datasets/PCRJ::qualidade-do-ar-dados-hor%C3%A1rios/about?layer=2)
 
-3. Execute o script `etl/etl.py`:
+3. Execute o script `etl/etl_2.py`:
 
 ```bash
-python etl/etl.py
+python etl/etl_2.py
 ```
 
 Este script irá executar o processo de extração, transformação e carga dos dados, seguindo as regras definidas no código.
