@@ -93,7 +93,7 @@ if granularity == 'Ano':
     max_period = df_filtered.groupby(df_filtered['data'].dt.year)[selectbox_poluentes].mean().mean(axis=1).idxmax()
     max_period_label = f"Ano: {max_period}"
 elif granularity == 'Mês':
-    max_period = df_filtered.groupby(df_filtered['data'].dt.to_period('M'))[selectbox_poluentes].mean().mean(axis=1).idxmax()
+    max_period = df_filtered.groupby(df_filtered['data'].dt.month)[selectbox_poluentes].mean().mean(axis=1).idxmax()
     max_period_label = f"Mês: {max_period}"
 elif granularity == 'Dia':
     max_period = df_filtered.groupby(df_filtered['data'].dt.date)[selectbox_poluentes].mean().mean(axis=1).idxmax()
@@ -114,7 +114,7 @@ if granularity == 'Ano':
     df_grouped = df_filtered.groupby(df_filtered['data'].dt.year)[selectbox_poluentes].mean()
     df_grouped.index.name = 'Ano'
 elif granularity == 'Mês':
-    df_grouped = df_filtered.groupby(df_filtered['data'].dt.to_period('M'))[selectbox_poluentes].mean()
+    df_grouped = df_filtered.groupby(df_filtered['data'].dt.month)[selectbox_poluentes].mean()
     df_grouped.index.name = 'Mês'
 elif granularity == 'Dia':
     df_grouped = df_filtered.groupby(df_filtered['data'].dt.date)[selectbox_poluentes].mean()
