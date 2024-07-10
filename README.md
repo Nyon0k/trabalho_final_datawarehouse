@@ -75,7 +75,10 @@ Para executar o tratamento de dados, siga as seguintes etapas:
 
 1. Certifique-se de ter todas as dependências instaladas e o ambiente virtual ativado.
 
-2. Execute o script `etl/etl.py`:
+2. Certifique-se de ter o arquvio correto de dados na pasta `dados`. Faça o download do .csv e salve no caminho `dados/dados_iqarj.csv`
+   [https://datariov2-pcrj.hub.arcgis.com/datasets/PCRJ::qualidade-do-ar-dados-hor%C3%A1rios/about?layer=2](https://datariov2-pcrj.hub.arcgis.com/datasets/PCRJ::qualidade-do-ar-dados-hor%C3%A1rios/about?layer=2)
+
+3. Execute o script `etl/etl.py`:
 
 ```bash
 python etl/etl.py
