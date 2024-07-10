@@ -19,8 +19,8 @@ async def raw_sql_insert(df: pd.DataFrame, table_name: str):
 
     # Constrói a consulta SQL de inserção em massa
     # Esta é uma abordagem genérica e pode precisar de ajustes para casos específicos
-    columns = ', '.join(records[0].keys())
-    values = ', '.join(['(' + ', '.join([f"'{v}'" for v in record.values()]) + ')' for record in records])
+    columns = ', '.join([col for col in records[0].keys() if col != 'timestamp'])
+    values = ', '.join(['(' + ', '.join([f"'{v}'" for k, v in record.items() if k != 'timestamp']) + ')' for record in records])
     sql_query = f"INSERT INTO {table_name} ({columns}) VALUES {values};"
 
     # Executa a consulta SQL bruta

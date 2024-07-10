@@ -33,8 +33,8 @@ def create_df_dtempo(df, df_dtempo_existing):
         df_dtempo_new['tempo_key'] = df_dtempo_new.index + 1
         df_dtempo_export = df_dtempo_new
 
-    df_dtempo_export[['tempo_key', 'ano', 'mes', 'dia', 'hora']].to_csv(os.path.join(os.getcwd(), 'dados/df_dtempo.csv'), index=False)
-    # df_dtempo_export.to_csv(os.path.join(os.getcwd(), 'dados/df_dtempo.csv'), index=False)
+    # df_dtempo_export[['tempo_key', 'ano', 'mes', 'dia', 'hora']].to_csv(os.path.join(os.getcwd(), 'dados/df_dtempo.csv'), index=False)
+    df_dtempo_export.to_csv(os.path.join(os.getcwd(), 'dados/df_dtempo.csv'), index=False)
 
     return df_dtempo_export
 
