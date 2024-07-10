@@ -100,8 +100,8 @@ Este script irá inserir os dados iniciais no banco de dados.
 
 ## Executando o Projeto
 
-Com todas as dependências instaladas e o banco de dados configurado, você está pronto para executar o projeto. Para iniciar o processo de ETL, execute o script principal:
+Com todas as dependências instaladas e o banco de dados configurado, você está pronto para o projeto de análise. Para iniciar o processo, execute o script principal:
 
 ```bash
-python etl/main.py
+streamlit run bi.py
 ```
