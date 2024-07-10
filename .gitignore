@@ -3,3 +3,4 @@ venv/
 dados/
 *.db
 *.csv
+bi2.py
