@@ -21,8 +21,9 @@ def create_df_dtempo(df, df_dtempo_existing):
     else:
         df_dtempo_new['tempo_key'] = df_dtempo_new.index + 1
         df_dtempo_export = df_dtempo_new
-
-    df_dtempo_export.to_csv('../dados/df_dtempo.csv', index=False)
+        
+    df_dtempo_export[['tempo_key', 'ano', 'mes', 'dia', 'hora']].to_csv(os.path.join(os.getcwd(), 'dados/df_dtempo.csv'), index=False)
+    # df_dtempo_export.to_csv(os.path.join(os.getcwd(), 'dados/df_dtempo.csv'), index=False)
 
     return df_dtempo_export
 
@@ -44,7 +45,7 @@ def create_df_dlocalizacao(df, df_dlocalizacao_existing):
         df_dlocalizacao_new['localizacao_key'] = df_dlocalizacao_new.index + 1
         df_dlocalizacao_export = df_dlocalizacao_new
 
-    df_dlocalizacao_export.to_csv('../dados/df_dlocalizacao.csv', index=False)
+    df_dlocalizacao_export.to_csv(os.path.join(os.getcwd(), 'dados/df_dlocalizacao.csv'), index=False)
 
     return df_dlocalizacao_export
 
@@ -66,7 +67,7 @@ def create_df_destacao(df, df_destacao_existing):
         df_destacao_new['estacao_key'] = df_destacao_new.index + 1
         df_destacao_export = df_destacao_new
 
-    df_destacao_export.to_csv('../dados/df_destacao.csv', index=False)
+    df_destacao_export.to_csv(os.path.join(os.getcwd(), 'dados/df_destacao.csv'), index=False)
 
     return df_destacao_export
 
@@ -99,7 +100,7 @@ def create_df_fqualidadear(df, df_dtempo, df_dlocalizacao, df_destacao, df_fqual
     df_fqualidadear_export.reset_index(drop=True, inplace=True)
     df_fqualidadear_export.index.name = 'id'
     
-    df_fqualidadear_export.to_csv('../dados/df_fqualidadear.csv', index=True)
+    df_fqualidadear_export.to_csv(os.path.join(os.getcwd(), 'dados/df_fqualidadear.csv'), index=True)
 
     return df_fqualidadear_export
 
@@ -107,10 +108,10 @@ def etl_function(df):
     df = df.drop(columns=['x_utm_sirgas2000', 'y_utm_sirgas2000'])
 
     # Carregar os DataFrames existentes, se existirem
-    df_dtempo_existing = pd.read_csv('../dados/df_dtempo.csv') if os.path.exists('../dados/df_dtempo.csv') else pd.DataFrame(columns=['tempo_key', 'ano', 'mes', 'dia', 'hora', 'timestamp'])
-    df_dlocalizacao_existing = pd.read_csv('../dados/df_dlocalizacao.csv') if os.path.exists('../dados/df_dlocalizacao.csv') else pd.DataFrame(columns=['localizacao_key', 'latitude', 'longitude'])
-    df_destacao_existing = pd.read_csv('../dados/df_destacao.csv') if os.path.exists('../dados/df_destacao.csv') else pd.DataFrame(columns=['estacao_key', 'station_id', 'station_name'])
-    df_fqualidadear_existing = pd.read_csv('../dados/df_fqualidadear.csv') if os.path.exists('../dados/df_fqualidadear.csv') else pd.DataFrame(columns=['tempo_key', 'estacao_key', 'localizacao_key', 'chuva', 'pres', 'rs', 'temp', 'ur', 'dir_vento', 'vel_vento', 'so2', 'no2', 'hcnm', 'hct', 'ch4', 'co', 'no', 'nox', 'o3', 'pm10', 'pm2_5'])
+    df_dtempo_existing = pd.read_csv(os.path.join(os.getcwd(), 'dados/df_dtempo.csv')) if os.path.exists(os.path.join(os.getcwd(), 'dados/df_dtempo.csv')) else pd.DataFrame(columns=['tempo_key', 'ano', 'mes', 'dia', 'hora', 'timestamp'])
+    df_dlocalizacao_existing = pd.read_csv(os.path.join(os.getcwd(), 'dados/df_dlocalizacao.csv')) if os.path.exists(os.path.join(os.getcwd(), 'dados/df_dlocalizacao.csv')) else pd.DataFrame(columns=['localizacao_key', 'latitude', 'longitude'])
+    df_destacao_existing = pd.read_csv(os.path.join(os.getcwd(), 'dados/df_destacao.csv')) if os.path.exists(os.path.join(os.getcwd(), 'dados/df_destacao.csv')) else pd.DataFrame(columns=['estacao_key', 'station_id', 'station_name'])
+    df_fqualidadear_existing = pd.read_csv(os.path.join(os.getcwd(), 'dados/df_fqualidadear.csv')) if os.path.exists(os.path.join(os.getcwd(), 'dados/df_fqualidadear.csv')) else pd.DataFrame(columns=['tempo_key', 'estacao_key', 'localizacao_key', 'chuva', 'pres', 'rs', 'temp', 'ur', 'dir_vento', 'vel_vento', 'so2', 'no2', 'hcnm', 'hct', 'ch4', 'co', 'no', 'nox', 'o3', 'pm10', 'pm2_5'])
 
     df_dtempo = create_df_dtempo(df, df_dtempo_existing)
     df_dlocalizacao = create_df_dlocalizacao(df, df_dlocalizacao_existing)
@@ -154,7 +155,7 @@ def predata_validator(file_path, history_path, etl_function):
         etl_function(current_df)
         current_df.to_csv(history_path, index=False)
 
-file_path = '../dados/output_4.csv'
-history_path = '../dados/dados_iqarj_historicos.csv'
+file_path = os.path.join(os.getcwd(), 'dados/dados_iqarj.csv')
+history_path = os.path.join(os.getcwd(), 'dados/dados_iqarj_historicos.csv')
 
 predata_validator(file_path, history_path, etl_function)
