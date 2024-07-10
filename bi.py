@@ -42,7 +42,7 @@ granularity = st.sidebar.selectbox('Granularidade do Tempo', ['Ano', 'Mês', 'Di
 if granularity == 'Ano':
     df_filtered['tempo'] = df_filtered['data'].dt.year
 elif granularity == 'Mês':
-    df_filtered['tempo'] = df_filtered['data'].dt.to_period('M')
+    df_filtered['tempo'] = df_filtered['data'].dt.month
 elif granularity == 'Dia':
     df_filtered['tempo'] = df_filtered['data'].dt.date
 elif granularity == 'Hora':
